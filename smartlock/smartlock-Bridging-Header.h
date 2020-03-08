@@ -9,5 +9,5 @@
 #ifndef test_h
 #define test_h
 #include<ifaddrs.h>
-
+#import <CommonCrypto/CommonHMAC.h>
 #endif /* test_h */
