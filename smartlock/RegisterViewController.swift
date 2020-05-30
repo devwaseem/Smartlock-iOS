@@ -32,6 +32,11 @@ class RegisterViewController: UIViewController {
             return
         }
         
+        if !mobileField.text!.isPhoneNumber || !mobileField.text!.contains("+") {
+            simpleAlert(title: "Error in Registeration", message: "Invalid mobile number")
+            return
+        }
+        
         if masterKeyField.text == "" {
             simpleAlert(title: "Error in Registeration", message: "Please enter the master key")
             return

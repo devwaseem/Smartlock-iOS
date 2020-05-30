@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyRSA
 
 enum DoorStatus {
-    case locked,unlocked
+    case locked,unlocked,breached
 }
 
 
@@ -81,11 +81,11 @@ class Server {
                     return
                 }
                 let doorStatus = responseJson["status"] as! String
-                if doorStatus == "unlocked" {
-                    completion(.unlocked)
-                    return
+                switch doorStatus {
+                    case "unlocked": return completion(.unlocked)
+                    case "breached": return completion(.breached)
+                    default: completion(.locked)
                 }
-                completion(.locked)
             }else {
                 completion(nil)
             }
@@ -196,9 +196,10 @@ class Server {
             if let result = response.result.value {
                 let responseJson = result as! NSDictionary
                 let success = responseJson["success"] as! Bool
+                if !success {
+                    return completion(false,"Something went wrong, Please try again")
+                }
                 let message = responseJson["message"] as! String
-                let otp = responseJson["otp"] as? String ?? ""
-                UIPasteboard.general.string = otp
                 completion(success,message)
             }else {
                 completion(false,"Something went wrong, Please try again")

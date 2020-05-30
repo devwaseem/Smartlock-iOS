@@ -114,6 +114,11 @@ class HomeViewController: UIViewController {
             self.lockLabel.text = "Unlocked"
             self.lockLabel.textColor = UIColor.init(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
             self.unlockButton.isHidden = true
+        case .breached:
+            self.lockStatusImageView.image = #imageLiteral(resourceName: "locked")
+            self.lockLabel.text = "Breached"
+            self.lockLabel.textColor = UIColor.init(red: 255/255, green: 0, blue: 87/255, alpha: 1)
+            self.unlockButton.isHidden = true
         }
     }
     
@@ -134,7 +139,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func unlockButtonPressed(_ sender: Any) {
         if Server.shared.token == "" {
-            simpleAlertWithHandler(title: "Smart Lock", message: "This device is not registered to smart lock...please register it first") {
+            simpleAlertWithHandler(title: "Smart Lock", message: "This device is not registered to smart lock.") {
                 self.performSegue(withIdentifier: "registerSegue", sender: self)
             }
             return

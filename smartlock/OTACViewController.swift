@@ -19,11 +19,11 @@ class OTACViewController: UIViewController {
     
     @IBAction func verifyOTAC(_ sender: Any) {
         if otacField.text == "" {
-            self.simpleAlert(title: "Please enter OTAC", message: nil)
+            self.simpleAlert(title: "Please enter OTP", message: nil)
             return
         }
         if masterKeyField.text == "" {
-            self.simpleAlert(title: "Please enter OTAC", message: nil)
+            self.simpleAlert(title: "Please enter master key", message: nil)
             return
         }
         let alert = UIAlertController(title: "Loading...", message: nil, preferredStyle: .alert)
